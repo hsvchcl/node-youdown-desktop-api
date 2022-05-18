@@ -1,4 +1,15 @@
 import { downloadProccess } from "../components/vdProcess/index.js";
+import { findFileConfig } from "../components/appConfig/index.js";
+
+export const getConfig = (_req, res) => {
+  try {
+    const configObject = findFileConfig();
+    res.status(200).json({ status: true, config: configObject });
+  } catch (error) {
+    return handleError(error, res);
+  }
+};
+
 export const downloadVideoList = async (req, res) => {
   try {
     const { videoList, type, path } = req.body;
