@@ -1,4 +1,8 @@
-import { downloadVideoList, getConfig } from "../controller/index.js";
+import {
+  downloadVideoList,
+  getConfig,
+  saveConfig,
+} from "../controller/index.js";
 
 import express from "express";
 const router = express.Router();
@@ -11,5 +15,6 @@ router.get("/config", getConfig);
 
 /* POST */
 router.post("/download-video-list", downloadVideoList);
+router.post("/save-config", saveConfig);
 
 export default router;

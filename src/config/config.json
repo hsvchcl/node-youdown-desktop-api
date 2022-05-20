@@ -1,4 +1,1 @@
-{
-  "ffmpeg_installation_path": null,
-  "download_file_path": null
-}
+{"path_ffmpeg":"/opt/homebrew/Cellar/ffmpeg/5.0.1/bin/ffmpeg","path_downloads":"/Users/hns/Desktop"}
