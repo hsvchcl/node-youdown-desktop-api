@@ -1,9 +1,10 @@
 import { videoDownload } from "./videoDownload.js";
 import { audioFileExtract } from "./audioFileExtract.js";
 import { deleteTempFile } from "./deleteTempFile.js";
-const main = async (videoUrl, type, path) => {
+import { findFileConfig } from "../appConfig/index.js";
+const main = async (videoUrl, type) => {
   try {
-    const pathTemp = await videoDownload(videoUrl, type, path);
+    const pathTemp = await videoDownload(videoUrl, type);
     if (type === "audioonly") {
       const audioExtract = await audioFileExtract(pathTemp);
       if (audioExtract) {
@@ -18,14 +19,14 @@ const main = async (videoUrl, type, path) => {
   }
 };
 
-export const downloadProccess = async (videoList, type, path) => {
+export const downloadProccess = async (videoList, type) => {
   try {
     // const videoList = ["https://www.youtube.com/watch?v=0m4NCA2dcnc"];
     // "audioandvideo"
     // "audioonly"
     const proccess = await Promise.all(
       videoList.map(async (video) => {
-        return main(video, type, path);
+        return main(video, type);
       })
     );
 
@@ -34,9 +35,16 @@ export const downloadProccess = async (videoList, type, path) => {
       return { status: false, message: "Error en el proceso de descarga." };
     } else {
       console.info("✅ Proceso finalizado.");
-      return { status: true, message: `Archivo guardado en ${path}.` };
+      return {
+        status: true,
+        message: `Archivo guardado en ${findFileConfig().path_downloads}.`,
+        path_download: findFileConfig().path_downloads,
+      };
     }
   } catch (error) {
-    console.error(error);
+    return {
+      status: false,
+      message: `${error.message}`,
+    };
   }
 };

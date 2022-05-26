@@ -25,8 +25,8 @@ export const getConfig = (_req, res) => {
 
 export const downloadVideoList = async (req, res) => {
   try {
-    const { videoList, type, path } = req.body;
-    const resp = await downloadProccess(videoList, type, path);
+    const { videoList, type } = req.body;
+    const resp = await downloadProccess(videoList, type);
     return handlerResponse(resp, res);
   } catch (error) {
     return handleError(error, res);
