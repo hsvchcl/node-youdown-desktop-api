@@ -3,6 +3,18 @@ import {
   findFileConfig,
   saveConfiguration,
 } from "../components/appConfig/index.js";
+import { obtainVideoInfo } from "../components/videoInfo/obtainVideoInfo.js";
+
+export const getVideoInfo = async (req, res) => {
+  try {
+    const { video_url } = req.query;
+    const response = await obtainVideoInfo(video_url);
+    res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+    return handleError(error, res);
+  }
+};
 
 export const saveConfig = (req, res) => {
   try {

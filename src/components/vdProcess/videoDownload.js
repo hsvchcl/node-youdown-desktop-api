@@ -6,8 +6,9 @@ export const videoDownload = (videoUrl, type) => {
   return new Promise(async (resolve, reject) => {
     try {
       // const videoValidate = ytdl.validateURL(videoUrl);
-      // const videoID = ytdl.getURLVideoID(videoUrl);
-      // let info = await ytdl.getBasicInfo(videoID);
+      const videoID = ytdl.getURLVideoID(videoUrl);
+      let info = await ytdl.getBasicInfo(videoID);
+      console.log(info.videoDetails.thumbnail);
 
       // console.log("videoValidate=>", videoValidate);
       // console.log("videoID=>", videoID);
